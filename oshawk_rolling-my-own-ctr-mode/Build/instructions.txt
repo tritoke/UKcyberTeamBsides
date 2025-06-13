@@ -1,0 +1,8 @@
+Store `server.py` and offer it as a file download.
+
+Host the Docker container:
+
+sudo docker build -t rolling-my-own-ctr-mode .
+sudo docker run -p 1337:1337 rolling-my-own-ctr-mode
+
+To update the flag, just change `flag.py` and rebuild the Docker container.

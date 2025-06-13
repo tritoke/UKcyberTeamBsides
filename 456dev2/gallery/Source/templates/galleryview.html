@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Gallery - {{ gallery.name }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <h1>View - {{gallery.name}}</h1>
+    <a href="/">Back to Main Page</a>
+
+    {% if gallery.description %} 
+    {% set lines = gallery.description.split('\n')%} 
+    {% for line in lines %}
+    <p>{{ line }}</p>
+    {% endfor %}
+    {% endif %}
+
+    {% for image in gallery.images%}
+    <div>
+        <img src="{{image.url}}" alt="{{image.alt}}" style="max-width: 1000px;" />
+        <p>{{image.attribution}}</p>
+    </div>
+    {% endfor %}
+  </body>
+</html>

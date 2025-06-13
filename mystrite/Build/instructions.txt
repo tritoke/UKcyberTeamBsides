@@ -1,0 +1,5 @@
+Upload log.pcap as challenge download.
+Reflag by running `python Source.py FLAGHERE OUTPUT.PCAP`.
+Automatically verifies the new flag by plotting in matplotlib and on a map `flag_path_map.html`.
+A prebuilt log.pcap already exists.
+As well as a solver that takes in a `log.pcap` in the same directory, and produces a `gps_flag_solve.html`.

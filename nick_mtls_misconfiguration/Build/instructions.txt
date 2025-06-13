@@ -1,0 +1,20 @@
+
+- For local dev, UV is recommended, but not required.
+- Running `docker compose build` will build the containers.
+
+To modify the flags, just edit the flag files in the `nginx/flags` directory and rebuild the containers.
+
+To edit the CAs/certs:
+```bash
+# Dev PKI CA
+openssl req -x509 -newkey rsa:2048 -days 3650 -nodes -keyout dev-pki/ca.key -out dev-pki/ca.crt -subj "/CN=Dev PKI CA"
+
+# Prod PKI CA
+openssl req -x509 -newkey rsa:2048 -days 3650 -nodes -keyout prod-pki/ca.key -out prod-pki/ca.crt -subj "/CN=Prod PKI CA"
+
+# Nginx server certificate
+openssl req -x509 -newkey rsa:2048 -days 3650 -nodes -keyout nginx/certs/server.key -out nginx/certs/server.crt -subj "/CN=nginx-server"
+
+# Create CA bundle for Nginx
+cat dev-pki/ca.crt prod-pki/ca.crt > nginx/certs/ca_bundle.crt
+```

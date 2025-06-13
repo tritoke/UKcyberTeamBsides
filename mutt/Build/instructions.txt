@@ -1,0 +1,4 @@
+In the Build folder:
+`docker compose up`
+
+Feel free to adjust things like the port number its hosted on, the resource it uses etc

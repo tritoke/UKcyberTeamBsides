@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Image Host</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <h1>Gallery</h1>
+    <h2>Create</h2>
+    <p>
+      Creation on new galleries is currently
+      <span style="font-weight: bold; color: red">DISABLED</span> due to abuse
+    </p>
+    <p>
+      We apologise for the inconvenience.
+    </p>
+    <button disabled>Upload</button>
+    <h2>View Public Galleries</h2>
+    {% for gallery in galleries %}
+    <p>
+      <a href="/view/{{gallery.slug}}">{{gallery.name}}</a>
+    </p>
+    {% endfor %}
+  </body>
+</html>

@@ -1,0 +1,6 @@
+Build is automated via Dockerfile.
+The flag is stored in the Dockerfile and can be amended as needed.
+
+Run docker compose to build the image and start the NextJS server:
+
+docker compose up

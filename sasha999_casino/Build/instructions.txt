@@ -1,0 +1,12 @@
+Upload the following files in Source/ as one zip file:
+* casino
+* casino.c
+* Dockerfile
+* build_docker.sh
+
+Run the challenge by running `./build_docker.sh`.
+
+Reflag by replacing flag.txt before re-running it.
+
+The `casino` binary is already built, but if you need to re-compile it, run `gcc casino.c -o casino -no-pie`.
+This may affect the existing solve.py, but if it does, the only difference should be the offset from the buffer to the return address.

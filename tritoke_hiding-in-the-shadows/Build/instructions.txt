@@ -1,0 +1,5 @@
+to generate a challenge run FLAG="YOUR FLAG GOES HERE" python create_chal.py
+
+this will produce chal.txt which is the handout to be given to the player
+
+I have included a built chal.txt which is solvable by my script and decodes to the correct flag.

@@ -1,0 +1,18 @@
+Write all instructions for build and deployment. for example
+
+docker -p 80:80 my_challenge_app
+
+or
+
+Store as file download
+
+or 
+
+go compile --aslr-bypass
+
+etc..
+
+All source files to be stored in /source
+
+All challenges must include the source data used to generate artifacts, code, execution data, etc. There may be instances where we need to re-flag challenges so this is a basic requirements. 
+

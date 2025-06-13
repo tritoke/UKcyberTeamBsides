@@ -1,0 +1,21 @@
+Optionally edit the caddyfile to have a hostname for caddy's automatic tls / different logging config, otherwise its fine over any http port
+
+build the docker image from the source directory, which embeds the flag from ../Flag/flag.txt
+
+```bash
+docker build . --build-arg "FLAG=$(cat ../Flag/flag.txt)"
+```
+
+
+Tag + deploy the docker image as-needed.
+
+container exposes port 80 http, forward with docker etc as-needed.
+
+
+ADVANCED:
+build.py generates a dist folder which is all static html
+except /uploads/flag.txt which is a caddy template forwarding to the flag env var
+and caddys file listing, which also uses a template with the "browse" directive.
+would support any http file server assuming /upload has auto-indexing enabled.
+
+but the docker image + caddy works just a well.

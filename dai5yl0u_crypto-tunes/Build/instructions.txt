@@ -1,0 +1,8 @@
+Store secret_key.txt as file download
+
+To generate the message using a different flag, use generate_message.py and change the value of the flag variable.
+
+To create a different key, this would need to be done manually using a different set of lyrics/letters.
+
+
+

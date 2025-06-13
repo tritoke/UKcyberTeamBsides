@@ -1,0 +1,1 @@
+Ensure the 3 artefacts (logs.zip, product_specs.docs, and server.py) are provided for every challenge in the series.

@@ -1,0 +1,82 @@
+<html>
+  <head>
+    <title>Anime Quote</title>
+    <style>
+      body {
+        font-family: 'Arial', sans-serif;
+        background: linear-gradient(to bottom, #f0f8ff, #e6e6fa);
+        color: #333;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+      .container {
+        background: #fff;
+        border-radius: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        padding: 30px;
+        max-width: 600px;
+        text-align: center;
+      }
+      h1 {
+        color: #ff6f61;
+        font-size: 2em;
+        margin-bottom: 10px;
+      }
+      h2 {
+        color: #4682b4;
+        font-size: 1.5em;
+        margin: 20px 0 10px;
+      }
+      .quote-box {
+        background: #f9f9f9;
+        border-left: 5px solid #ff6f61;
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 5px;
+        font-style: italic;
+      }
+      .character-img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        margin: 10px auto;
+        object-fit: cover;
+        border: 3px solid #4682b4;
+      }
+      .info {
+        font-size: 1.1em;
+        color: #555;
+      }
+      a {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 20px;
+        background: #ff6f61;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background 0.3s;
+      }
+      a:hover {
+        background: #e55a50;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Welcome, {% if is_code %}{{ username | eval }}{% else %}{{ username }}{% endif %}!</h1>
+      <h2>Random Anime Quote</h2>
+      <img src="{{ image_url }}" alt="{{ name }}" class="character-img">
+      <div class="quote-box">
+        <p><strong>Quote:</strong> {{ quote }}</p>
+      </div>
+      <p class="info"><strong>Character:</strong> {{ name }}</p>
+      <p class="info"><strong>Anime:</strong> {{ anime }}</p>
+      <a href="/">Back</a>
+    </div>
+  </body>
+</html>

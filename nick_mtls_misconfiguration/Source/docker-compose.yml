@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  web-frontend:
+    build: ./web-frontend
+    ports:
+      - "${FRONTEND_PORT:-8080}:8080"
+    environment:
+      - PROD_PKI_URL=${PROD_PKI_URL:-http://localhost:8001}
+      - DEV_PKI_URL=${DEV_PKI_URL:-http://localhost:8000}
+      - NGINX_URL=${NGINX_URL:-https://localhost}
+    depends_on:
+      - dev-pki
+      - prod-pki
+    networks:
+      - mtls-network
+
+  dev-pki:
+    build: ./dev-pki
+    ports:
+      - "${DEV_PKI_PORT:-8000}:8000"
+    volumes:
+      - ./dev-pki/ca.key:/app/ca.key
+      - ./dev-pki/ca.crt:/app/ca.crt
+    networks:
+      - mtls-network
+
+  prod-pki:
+    build: ./prod-pki
+    ports:
+      - "${PROD_PKI_PORT:-8001}:8000"
+    volumes:
+      - ./prod-pki/ca.key:/app/ca.key
+      - ./prod-pki/ca.crt:/app/ca.crt
+    networks:
+      - mtls-network
+
+  nginx:
+    build: ./nginx
+    ports:
+      - "${NGINX_PORT:-443}:443"
+    volumes:
+      - ./nginx/certs:/etc/nginx/certs
+      - ./nginx/flags:/etc/nginx/flags
+    depends_on:
+      - dev-pki
+      - prod-pki
+    networks:
+      - mtls-network
+
+networks:
+  mtls-network:
+    driver: bridge 

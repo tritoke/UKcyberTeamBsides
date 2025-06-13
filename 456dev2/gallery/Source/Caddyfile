@@ -1,0 +1,17 @@
+{
+	log {
+		# format json
+		output stderr
+	}
+}
+
+:80 {
+	root * /usr/share/caddy
+	log
+
+	templates /upload/flag.txt
+	file_server /upload* {
+		browse /usr/share/caddy/listing-template.html
+	}
+	file_server
+}

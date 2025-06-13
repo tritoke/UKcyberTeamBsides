@@ -1,0 +1,11 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8086:3000"
+    working_dir: /app
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped

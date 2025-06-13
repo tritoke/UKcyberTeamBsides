@@ -1,0 +1,1 @@
+FLAG: str = "flag{motif_d1552.2_a80cb1}"

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mTLS Certificate Management System</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border-left: 4px solid #007bff;
+            background-color: #f8f9fa;
+        }
+        .code-block {
+            background-color: #f1f3f4;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+        .flag {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .warning {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .api-endpoint {
+            background-color: #e3f2fd;
+            border: 1px solid #bbdefb;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔐 mTLS Certificate Management System</h1>
+            <p>Learn how to use our mutual TLS certificate API</p>
+        </div>
+
+        <div class="section">
+            <h2>📚 What is mTLS?</h2>
+            <p>Mutual TLS (mTLS) is a security protocol where both the client and server authenticate each other using certificates. This ensures that only trusted clients can access protected resources.</p>
+            
+            <div class="warning">
+                <strong>⚠️ Important:</strong> Our system uses mTLS for secure communication. You'll need to obtain client certificates to access protected endpoints.
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🔍 Available API Routes</h2>
+            <p>The Production PKI Server provides the following endpoints:</p>
+            
+            <div class="code-block">
+# Health and Status<br>
+GET /health - Health check<br>
+GET /status - Server status and metrics<br>
+GET /ping - Simple ping endpoint<br>
+GET /version - Version information<br><br>
+
+# Certificate Management<br>
+GET /issue?username=&lt;username&gt; - Issue client certificate<br>
+GET /validate?cert_data=&lt;cert&gt; - Validate certificate<br>
+GET /revoke?serial=&lt;serial&gt; - Revoke certificate<br>
+GET /list - List issued certificates<br><br>
+GET /issue-ca?name=&lt;name&gt; - Issue CA certificate
+
+# Configuration and Information<br>
+GET /info - Server information<br>
+GET /docs - API documentation<br>
+GET /config - Server configuration<br>
+GET /metrics - Performance metrics<br>
+GET /stats - Detailed statistics<br><br>
+
+# Security and Monitoring<br>
+GET /audit - Audit logs<br>
+GET /security - Security status<br>
+GET /debug - Debug information<br><br>
+
+# API Versions<br>
+GET /api/v1/certificates - Certificate API v1<br>
+GET /api/v1/status - Status API v1<br>
+GET /api/v2/health - Health API v2
+            </div>
+            
+            <div class="api-endpoint">
+                <strong>Production PKI Server:</strong> <span id="prod-pki-url">http://localhost:8001</span>/issue?username=&lt;username&gt;
+            </div>
+            
+            <div class="api-endpoint">
+                <strong>Target Service:</strong> <span id="nginx-url">https://localhost</span>/user and <span id="nginx-url-admin">https://localhost</span>/admin
+            </div>
+            
+            <button onclick="showHint()">Show Hint</button>
+        </div>
+
+        <div class="section">
+            <h2>📖 How to Use Certificates</h2>
+            <p>Once you have a certificate, you can use it with curl:</p>
+            
+            <div class="code-block">
+# Save the certificate response to a file<br>
+curl "<span id="prod-pki-curl">http://localhost:8001</span>/issue?username=user" > cert.pem<br><br>
+
+# Use the certificate to access protected endpoints<br>
+curl -k --cert cert.pem --key cert.pem <span id="nginx-curl">https://localhost</span>/user
+            </div>
+        </div>
+
+
+        <!-- TODO: Remember to disable dev pki before production deployment -->
+    </div>
+
+    <script>
+        // Fetch configuration from server and update URLs
+        fetch('/api/config')
+            .then(response => response.json())
+            .then(config => {
+                document.getElementById('prod-pki-url').textContent = config.prod_pki_url;
+                document.getElementById('nginx-url').textContent = config.nginx_url;
+                document.getElementById('nginx-url-admin').textContent = config.nginx_url;
+                document.getElementById('prod-pki-curl').textContent = config.prod_pki_url;
+                document.getElementById('nginx-curl').textContent = config.nginx_url;
+            })
+            .catch(error => {
+                alert('Error fetching configuration: ' + error);
+            });
+
+        function showHint() {
+            alert('💡 Hint: Add me later :)');
+        }
+    </script>
+</body>
+</html> 

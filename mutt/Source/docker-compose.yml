@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  ctf-web:
+    build: .
+    ports:
+      - "8088:5000"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 128M
+    networks:
+      - ctfnet
+    restart: unless-stopped
+
+networks:
+  ctfnet:
+    driver: bridge

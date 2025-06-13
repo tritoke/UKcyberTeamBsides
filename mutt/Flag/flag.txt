@@ -1,0 +1,3 @@
+Flags are generated on build in the Dockerfile so they have randomness/prevents flag sharing/means users can get a real zip of the entire challenge
+
+example: flag{UKCT-mutt_1AI1NnJWRr5r0RnR}
